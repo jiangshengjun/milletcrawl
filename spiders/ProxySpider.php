@@ -45,6 +45,7 @@ class ProxySpider {
 
     public function crawl_56ads_list($response,$info,$request) {
         $urls = array();
+        $response = iconv("GBK","UTF-8",$response);
 
         if($info["http_code"] == 200) {
             $regstr = "/<a href=\"\/article\/(.*)\.html\" class=\"title\">/";
@@ -61,8 +62,7 @@ class ProxySpider {
 
     public function crawl_56ads_proxy($response,$info,$request) {
         $proxies = array();
-        print_r($info);
-        print_r($request);
+        $response = iconv("GBK","UTF-8",$response);
 
         if($info["http_code"] == 200) {
             $regstr = "/\d{1-3}\.\d{1-3}\.\d{1-3}\.\d{1-3}:\d+\s+@HTTP/i";
