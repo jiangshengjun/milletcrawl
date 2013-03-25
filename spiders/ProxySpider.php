@@ -65,7 +65,7 @@ class ProxySpider {
         print_r($request);
 
         if($info["http_code"] == 200) {
-            $regstr = "/\d\.\d\.\d\.\d:\d\s+@HTTP/i";
+            $regstr = "/\d{1-3}\.\d{1-3}\.\d{1-3}\.\d{1-3}:\d+\s+@HTTP/i";
             preg_match_all($regstr, $response, $matches);
             print_r($matches);
 
