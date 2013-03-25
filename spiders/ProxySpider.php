@@ -39,6 +39,8 @@ class ProxySpider {
 
             $rc->execute(DEF_MAX_THREADS);
             $proxies = $rc->get_callback_data();
+
+            print_r($proxies);
         }
 
     }
@@ -65,9 +67,13 @@ class ProxySpider {
         $response = iconv("GBK","UTF-8",$response);
 
         if($info["http_code"] == 200) {
-            $regstr = "/\d+\.\d+\.\d+\.\d+:\d+/i";
+            $regstr = "/(\d+\.\d+\.\d+\.\d+):(\d+)/i";
             preg_match_all($regstr, $response, $matches);
-            print_r($matches);
+            if(!empty($matches[1])) {
+                foreach ($matches[1] as $k=>$v) {
+                    $proxies[] = array("host"=>$v, "port"=>$matches[2][$k]);
+                }
+            }
 
         }
 
